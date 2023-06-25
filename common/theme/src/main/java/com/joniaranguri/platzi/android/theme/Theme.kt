@@ -1,4 +1,4 @@
-package com.joniaranguri.platzi.android.challenge.ui.theme
+package com.joniaranguri.platzi.android.theme
 
 import android.app.Activity
 import androidx.compose.material3.MaterialTheme
@@ -43,7 +43,7 @@ private val DarkColorScheme = darkColorScheme(
 
 
 @Composable
-fun PlatziandroidchallengeTheme(
+fun PlatziChallengeTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = DarkColorScheme

@@ -1,4 +1,4 @@
-package com.joniaranguri.platzi.android.challenge.ui.theme
+package com.joniaranguri.platzi.android.theme
 
 import androidx.compose.ui.graphics.Color
 
