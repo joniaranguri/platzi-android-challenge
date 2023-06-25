@@ -51,7 +51,9 @@ android {
 dependencies {
 
     implementation project(':common:theme')
+    implementation project(':common:ui')
     implementation project(':features:books')
+    implementation project(':features:book-details')
     implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation platform("org.jetbrains.kotlin:kotlin-bom:$kotlin_bom_version")
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_ktx_version"
