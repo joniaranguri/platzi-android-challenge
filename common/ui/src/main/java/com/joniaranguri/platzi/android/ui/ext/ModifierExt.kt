@@ -7,3 +7,7 @@ import com.joniaranguri.platzi.android.theme.Dimen.defaultPadding
 fun Modifier.defaultScreenPadding(): Modifier = this
     .padding(horizontal = defaultPadding())
     .padding(bottom = defaultPadding())
+fun Modifier.defaultContentPadding(): Modifier = this
+    .padding(defaultPadding())
+
+fun defaultPadding() = defaultPadding()

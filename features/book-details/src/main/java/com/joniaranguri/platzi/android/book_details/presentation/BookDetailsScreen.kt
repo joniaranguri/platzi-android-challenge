@@ -15,7 +15,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import com.joniaranguri.platzi.android.ui.ext.defaultScreenPadding
+import com.joniaranguri.platzi.android.ui.widgets.TitleLarge
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,9 +60,9 @@ internal fun DetailsTopAppBar(title: String, goBack: () -> Unit) {
     TopAppBar(
         navigationIcon = {
             IconButton(onClick = goBack) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Ir hacia arriba")
+                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Go back")
             }
         },
-        title = { Text(text = title) }
+        title = { Text(text = title, maxLines = 1, overflow = TextOverflow.Ellipsis) }
     )
 }

@@ -67,6 +67,10 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
+    //Moshi
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_kotlin_version"
+    implementation "com.squareup.moshi:moshi-adapters:$moshi_kotlin_version"
+
     // Coil
     implementation "io.coil-kt:coil-compose:$coil_compose_version"
 
