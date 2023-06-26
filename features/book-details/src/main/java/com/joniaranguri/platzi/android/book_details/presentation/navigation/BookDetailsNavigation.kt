@@ -11,8 +11,10 @@ fun NavGraphBuilder.bookDetailsScreen(goBack: () -> Unit) {
         BookDetailsScreen(
             bookId = it.arguments?.getString(NavArgument.BookIdDetails.id)
                 ?: NavArgument.BookIdDetails.default,
-            bookName = it.arguments?.getString(NavArgument.BookNameDetails.id)
+            title = it.arguments?.getString(NavArgument.BookNameDetails.id)
                 ?: NavArgument.BookNameDetails.default,
+            coverImageUrl = it.arguments?.getString(NavArgument.BookCoverImageDetails.id)
+                ?: NavArgument.BookCoverImageDetails.default,
             goBack
         )
     }
