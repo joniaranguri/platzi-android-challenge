@@ -5,5 +5,5 @@ data class Book(
     val title: String,
     val firstPublishYear: Int,
     val coverImageUrl: String,
-    val authorName: List<String>
+    val authors: String
 )

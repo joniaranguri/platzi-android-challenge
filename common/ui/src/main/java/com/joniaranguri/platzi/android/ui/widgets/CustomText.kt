@@ -13,6 +13,7 @@ fun TitleSmall(text:String){
         style = MaterialTheme.typography.titleSmall,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
+        color = MaterialTheme.colorScheme.secondary
     )
 }
 
@@ -22,7 +23,6 @@ fun TitleLarge(text:String){
         text = text,
         style = MaterialTheme.typography.titleLarge,
         maxLines = 2,
-        overflow = TextOverflow.Ellipsis,
-        color = MaterialTheme.colorScheme.secondary
+        overflow = TextOverflow.Ellipsis
     )
 }

@@ -22,7 +22,7 @@ data class BookCached(
     @ColumnInfo(name = "cover_image_url")
     val coverImageUrl: String,
 
-    @ColumnInfo(name = "author_name")
-    val authorName: List<String>
+    @ColumnInfo(name = "authors")
+    val authors: String
 
 )

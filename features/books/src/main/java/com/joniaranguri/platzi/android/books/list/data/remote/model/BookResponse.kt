@@ -17,6 +17,6 @@ data class BookResponse(
     val coverImageId: Long,
 
     @Json(name = "author_name")
-    val authorName: List<String>
+    val authorsList: List<String>
 
 )

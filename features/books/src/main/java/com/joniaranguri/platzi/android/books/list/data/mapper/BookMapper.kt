@@ -9,7 +9,7 @@ fun BookResponse.toDomainModel() = Book(
     title = title,
     firstPublishYear = firstPublishYear,
     coverImageUrl = "https://covers.openlibrary.org/b/id/$coverImageId-L.jpg",
-    authorName = authorName
+    authors = authorsList.joinToString()
 )
 
 fun BookCached.toDomainModel() = Book(
@@ -17,7 +17,7 @@ fun BookCached.toDomainModel() = Book(
     title = title,
     firstPublishYear = firstPublishYear,
     coverImageUrl = coverImageUrl,
-    authorName = authorName
+    authors = authors
 )
 
 fun Book.toEntityModel() = BookCached(
@@ -25,5 +25,5 @@ fun Book.toEntityModel() = BookCached(
     title = title,
     firstPublishYear = firstPublishYear,
     coverImageUrl = coverImageUrl,
-    authorName = authorName
+    authors = authors
 )

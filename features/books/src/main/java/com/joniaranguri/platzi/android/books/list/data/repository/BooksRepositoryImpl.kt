@@ -8,27 +8,27 @@ val mockedBooks = listOf(
         title = "To Kill a Mockingbird",
         firstPublishYear = 1960,
         coverImageUrl = "https://covers.openlibrary.org/b/id/12606502-L.jpg",
-        authorName = listOf("Harper Lee, Harper Lee, Harper Lee, Harper Lee, Harper Lee and Harper Lee")
+        authors = "Harper Lee, Harper Lee, Harper Lee, Harper Lee, Harper Lee and Harper Lee"
     ),
     Book(
         id = "OL27310398W",
         title = "This is a title super super super mega large, even longer than the panamerican highway",
         firstPublishYear = 2021,
         coverImageUrl = "https://covers.openlibrary.org/b/id/12992962-L.jpg",
-        authorName = listOf("H. D. Carlton")
+        authors = "H. D. Carlton"
     ),
     Book(
         id = "OL24236112W",
         title = "As Good As Dead",
         firstPublishYear = 2021,
         coverImageUrl = "https://covers.openlibrary.org/b/id/10716589-L.jpg",
-        authorName = listOf("Holly Jackson")
+        authors = "Holly Jackson"
     ),
     Book(
         id = "OL35710173W",
         title = "Your Fault",
         firstPublishYear = 2023,
         coverImageUrl = "https://firebasestorage.googleapis.com/v0/b/joniaranguri-resume.appspot.com/o/platzi-challenge%2Fcover-not-available.png?alt=media&token=0b43af6d-f671-4198-88d2-26062bd730d7",
-        authorName = listOf("Mercedes Ron")
+        authors = "Mercedes Ron"
     )
 )
