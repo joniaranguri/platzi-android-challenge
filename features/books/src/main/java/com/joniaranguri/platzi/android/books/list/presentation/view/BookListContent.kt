@@ -14,7 +14,7 @@ import com.joniaranguri.platzi.android.ui.ext.defaultScreenPadding
 @Composable
 fun BookListContent(
     modifier: Modifier,
-    goToBookDetails: (bookName: String, bookId: String) -> Unit,
+    goToBookDetails: (bookName: String, bookId: String, coverImage:String) -> Unit,
     bookList: List<Book> = mockedBooks
 ) {
     LazyColumn(

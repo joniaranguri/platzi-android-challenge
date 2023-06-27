@@ -8,8 +8,8 @@ sealed class NavigationItem(
     object BookList : NavigationItem(ScreenRoutes.BOOK_LIST, "Recommended books")
     object BookDetails : NavigationItem(
         ScreenRoutes.BOOK_DETAILS,
-        "Detail",
-        { "${ScreenRoutes.BOOK_DETAILS}/{${NavArgument.BookNameDetails.id}}/{${NavArgument.BookIdDetails.id}}" })
+        "Book Detail",
+        { "${ScreenRoutes.BOOK_DETAILS}/{${NavArgument.BookNameDetails.id}}/{${NavArgument.BookIdDetails.id}}/{${NavArgument.BookCoverImageDetails.id}}" })
 }
 
 private object ScreenRoutes {

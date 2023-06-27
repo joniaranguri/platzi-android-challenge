@@ -33,11 +33,11 @@ import com.joniaranguri.platzi.android.ui.widgets.TitleSmall
 @Composable
 fun BookRow(
     dto: Book,
-    onBookClick: (bookName: String, bookId: String) -> Unit
+    onBookClick: (bookName: String, bookId: String, coverImage: String) -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        onClick = { onBookClick(dto.title, dto.id) },
+        onClick = { onBookClick(dto.title, dto.id, dto.coverImageUrl) },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.onTertiary,
         )
@@ -53,7 +53,7 @@ fun BookRow(
                 verticalArrangement = Arrangement.Center
 
             ) {
-                TitleSmall(text = dto.authorName.first())
+                TitleSmall(text = dto.authors)
                 TitleLarge(text = dto.title)
                 Text(text = dto.firstPublishYear.toString())
             }
