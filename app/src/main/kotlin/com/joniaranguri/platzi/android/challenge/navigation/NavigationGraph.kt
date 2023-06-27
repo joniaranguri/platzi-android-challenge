@@ -6,6 +6,7 @@ import androidx.navigation.compose.rememberNavController
 import com.joniaranguri.platzi.android.book_details.presentation.navigation.bookDetailsScreen
 import com.joniaranguri.platzi.android.books.list.presentation.navigation.bookListScreen
 import com.joniaranguri.platzi.android.ui.navigation.NavigationItem
+import java.net.URLEncoder
 
 @Composable
 fun NavigationGraph() {
@@ -14,8 +15,9 @@ fun NavigationGraph() {
         navController = navController,
         startDestination = NavigationItem.BookList.route
     ) {
-        bookListScreen { bookName, bookId ->
-            val route = "${NavigationItem.BookDetails.route}/${bookName}/${bookId}"
+        bookListScreen { bookName, bookId, coverImage ->
+            val encodedImage = URLEncoder.encode(coverImage, "utf-8")
+            val route = "${NavigationItem.BookDetails.route}/${bookName}/${bookId}/${encodedImage}"
             navController.navigate(route)
         }
         bookDetailsScreen {

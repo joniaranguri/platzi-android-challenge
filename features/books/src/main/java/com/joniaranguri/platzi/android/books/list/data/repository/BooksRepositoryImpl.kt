@@ -30,5 +30,12 @@ val mockedBooks = listOf(
         firstPublishYear = 2023,
         coverImageUrl = "https://firebasestorage.googleapis.com/v0/b/joniaranguri-resume.appspot.com/o/platzi-challenge%2Fcover-not-available.png?alt=media&token=0b43af6d-f671-4198-88d2-26062bd730d7",
         authors = "Mercedes Ron"
+    ),
+    Book(
+        id = "OL35710173W",
+        title = "Your Fault",
+        firstPublishYear = 2023,
+        coverImageUrl = "https://firebasestorage.googleapis.com/v0/b/joniaranguri-resume.appspot.com/o/platzi-challenge%2Fcover-not-available.png?alt=media&token=0b43af6d-f671-4198-88d2-26062bd730d7",
+        authors = "Mercedes Ron"
     )
 )

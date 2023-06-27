@@ -1,8 +1,5 @@
 package com.joniaranguri.platzi.android.book_details.presentation
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -13,43 +10,30 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import com.joniaranguri.platzi.android.ui.ext.defaultScreenPadding
-import com.joniaranguri.platzi.android.ui.widgets.TitleLarge
+import com.joniaranguri.platzi.android.book_details.data.repository.mockedDetails
+import com.joniaranguri.platzi.android.book_details.presentation.view.BookDetailsContent
+import com.joniaranguri.platzi.android.ui.navigation.NavigationItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookDetailsScreen(
     bookId: String,
-    bookName: String,
+    title: String,
+    coverImageUrl: String,
     goBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = { DetailsTopAppBar(title = bookName, goBack) }
+        topBar = { DetailsTopAppBar(title = title, goBack) }
     ) { innerPadding ->
         BookDetailsContent(
-            bookId = bookId,
+            title = title,
+            coverImageUrl = coverImageUrl,
+            bookDetails = mockedDetails,
             modifier.padding(innerPadding)
-        )
-    }
-}
-
-@Composable
-fun BookDetailsContent(bookId: String, modifier: Modifier) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .defaultScreenPadding(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "Book Id : $bookId",
-            modifier = modifier
         )
     }
 }
@@ -63,6 +47,6 @@ internal fun DetailsTopAppBar(title: String, goBack: () -> Unit) {
                 Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Go back")
             }
         },
-        title = { Text(text = title, maxLines = 1, overflow = TextOverflow.Ellipsis) }
+        title = { Text(text = NavigationItem.BookDetails.title) }
     )
 }

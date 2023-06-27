@@ -13,7 +13,7 @@ import com.joniaranguri.platzi.android.ui.navigation.NavigationItem
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookListScreen(
-    goToBookDetails: (bookName: String, bookId: String) -> Unit,
+    goToBookDetails: (bookName: String, bookId: String, coverImage: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
