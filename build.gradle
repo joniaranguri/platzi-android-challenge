@@ -15,7 +15,7 @@ buildscript {
         okhttp_version = '5.0.0-alpha.5'
         chucker_version = '3.5.2'
         timber_version = '5.0.1'
-        moshi_converter_version = '2.3.0'
+        moshi_converter_version = '2.9.0'
         moshi_kotlin_version = '1.14.0'
         room_version = '2.5.2'
         paging_version = '3.1.1'
