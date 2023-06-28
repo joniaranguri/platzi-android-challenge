@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation project(path: ':common:ui')
+    implementation project(path: ':common:core')
     implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation platform("org.jetbrains.kotlin:kotlin-bom:$kotlin_bom_version")
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_ktx_version"
@@ -62,18 +63,33 @@ dependencies {
 
     //Room
     implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$moshi_converter_version"
+
+    // Okhttp
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation"com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation "com.github.chuckerteam.chucker:library:$chucker_version"
 
     //Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_kotlin_version"
     implementation "com.squareup.moshi:moshi-adapters:$moshi_kotlin_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_kotlin_version"
+
+
+    // Swipe Refresh
+    implementation "com.google.accompanist:accompanist-swiperefresh:$swiperefresh_version"
 
     // Paging
-    implementation "androidx.paging:paging-runtime:$paging_runtime_version"
-    implementation "androidx.paging:paging-compose:$paging_compose_version"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+    implementation   "androidx.paging:paging-compose:$paging_compose_version"
+
+    implementation "com.google.accompanist:accompanist-pager:$pager_version"
 
     // Coil
     implementation "io.coil-kt:coil-compose:$coil_compose_version"

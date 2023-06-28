@@ -1,8 +1,10 @@
 package com.joniaranguri.platzi.android.books.list.data.remote.model
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-data class BookListResponseBook(
+@JsonClass(generateAdapter = true)
+data class BookListResponse(
     @Json(name = "works")
-    val id: List<BookResponse>
+    val books: List<BookResponse>?
 )
 
