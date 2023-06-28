@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -64,7 +65,15 @@ fun FrontCard(title: String, coverImageUrl: String, bookDetails: BookDetails) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        val noCoverImage =
+            painterResource(com.joniaranguri.platzi.android.ui.R.drawable.cover_not_available)
+        val coverPlaceholderImage =
+            painterResource(com.joniaranguri.platzi.android.ui.R.drawable.book_placeholder)
+
         AsyncImage(
+            placeholder = coverPlaceholderImage,
+            error = noCoverImage,
+            fallback = noCoverImage,
             model = ImageRequest.Builder(LocalContext.current)
                 .data(coverImageUrl)
                 .crossfade(500).build(),
