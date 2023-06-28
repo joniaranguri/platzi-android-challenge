@@ -11,9 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextOverflow
-import com.joniaranguri.platzi.android.book_details.data.repository.mockedDetails
-import com.joniaranguri.platzi.android.book_details.presentation.view.BookDetailsContent
+import com.joniaranguri.platzi.android.book_details.presentation.view.BookDetailsBody
 import com.joniaranguri.platzi.android.ui.navigation.NavigationItem
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,10 +27,10 @@ fun BookDetailsScreen(
         modifier = modifier,
         topBar = { DetailsTopAppBar(title = title, goBack) }
     ) { innerPadding ->
-        BookDetailsContent(
+        BookDetailsBody(
+            bookId = bookId,
             title = title,
             coverImageUrl = coverImageUrl,
-            bookDetails = mockedDetails,
             modifier.padding(innerPadding)
         )
     }

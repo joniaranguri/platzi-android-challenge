@@ -4,6 +4,7 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
+import com.joniaranguri.platzi.android.core.data.remote.model.InconsistentTypeAdapter
 import com.joniaranguri.platzi.android.core.network.interceptor.HttpRequestInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -23,6 +24,7 @@ private const val CLIENT_CACHE_DIRECTORY = "http"
 
 fun createMoshi(): Moshi {
     return Moshi.Builder()
+        .add(InconsistentTypeAdapter())
         .addLast(KotlinJsonAdapterFactory())
         .build()
 }

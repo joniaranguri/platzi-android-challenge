@@ -1,6 +1,7 @@
-package com.joniaranguri.platzi.android.books.list.data.remote.di
+package com.joniaranguri.platzi.android.book_details.data.remote.di
 
-import com.joniaranguri.platzi.android.books.list.data.remote.api.BooksApi
+import com.joniaranguri.platzi.android.book_details.data.remote.api.AuthorDetailsApi
+import com.joniaranguri.platzi.android.book_details.data.remote.api.BookDetailsApi
 import com.joniaranguri.platzi.android.core.data.remote.di.RemoteModule.Companion.BASE_URL
 import com.joniaranguri.platzi.android.core.network.createRetrofitWithMoshi
 import com.squareup.moshi.Moshi
@@ -16,13 +17,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class RemoteModule {
+
     @Provides
     @Singleton
-    fun provideBooksApi(
+    fun provideBookDetailsApi(
         @Named(value = BASE_URL) baseUrl: String,
         okHttpClient: OkHttpClient,
         moshi: Moshi
-    ): BooksApi {
+    ): BookDetailsApi {
         return createRetrofitWithMoshi(
             okHttpClient = okHttpClient,
             moshi = moshi,
@@ -30,4 +32,17 @@ class RemoteModule {
         )
     }
 
+    @Provides
+    @Singleton
+    fun provideAuthorDetailsApi(
+        @Named(value = BASE_URL) baseUrl: String,
+        okHttpClient: OkHttpClient,
+        moshi: Moshi
+    ): AuthorDetailsApi {
+        return createRetrofitWithMoshi(
+            okHttpClient = okHttpClient,
+            moshi = moshi,
+            baseUrl = baseUrl
+        )
+    }
 }
