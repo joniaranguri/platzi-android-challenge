@@ -1,22 +1,24 @@
 package com.joniaranguri.platzi.android.books.list.data.remote.model
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class BookResponse(
 
     @Json(name = "key")
-    val key: String,
+    val key: String?,
 
     @Json(name = "title")
-    val title: String,
+    val title: String?,
 
     @Json(name = "first_publish_year")
-    val firstPublishYear: Int,
+    val firstPublishYear: Int?,
 
     @Json(name = "cover_i")
-    val coverImageId: Long,
+    val coverImageId: Long?,
 
     @Json(name = "author_name")
-    val authorsList: List<String>
+    val authorsList: List<String>?
 
 )

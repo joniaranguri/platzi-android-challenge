@@ -26,6 +26,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", '\"https://openlibrary.org\"'
+        }
+        debug {
+            buildConfigField "String", "BASE_URL", '\"https://openlibrary.org\"'
         }
     }
     compileOptions {
@@ -37,6 +41,7 @@ android {
     }
     buildFeatures {
         compose true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.3.2'
@@ -52,6 +57,7 @@ dependencies {
 
     implementation project(':common:theme')
     implementation project(':common:ui')
+    implementation project(':common:core')
     implementation project(':features:books')
     implementation project(':features:book-details')
     implementation "androidx.core:core-ktx:$core_ktx_version"

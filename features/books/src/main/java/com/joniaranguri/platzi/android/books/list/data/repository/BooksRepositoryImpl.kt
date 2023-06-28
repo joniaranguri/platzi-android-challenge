@@ -1,41 +1,34 @@
 package com.joniaranguri.platzi.android.books.list.data.repository
 
+import androidx.annotation.VisibleForTesting
+import com.joniaranguri.platzi.android.books.list.data.local.dao.BooksDao
+import com.joniaranguri.platzi.android.books.list.data.mapper.toDomainModel
+import com.joniaranguri.platzi.android.books.list.data.mapper.toEntityModel
+import com.joniaranguri.platzi.android.books.list.data.remote.api.BooksApi
 import com.joniaranguri.platzi.android.books.list.domain.model.Book
+import com.joniaranguri.platzi.android.books.list.domain.repository.BooksRepository
+import javax.inject.Inject
 
-val mockedBooks = listOf(
-    Book(
-        id = "OL3140834W",
-        title = "To Kill a Mockingbird",
-        firstPublishYear = 1960,
-        coverImageUrl = "https://covers.openlibrary.org/b/id/12606502-L.jpg",
-        authors = "Harper Lee, Harper Lee, Harper Lee, Harper Lee, Harper Lee and Harper Lee"
-    ),
-    Book(
-        id = "OL27310398W",
-        title = "This is a title super super super mega large, even longer than the panamerican highway",
-        firstPublishYear = 2021,
-        coverImageUrl = "https://covers.openlibrary.org/b/id/12992962-L.jpg",
-        authors = "H. D. Carlton"
-    ),
-    Book(
-        id = "OL24236112W",
-        title = "As Good As Dead",
-        firstPublishYear = 2021,
-        coverImageUrl = "https://covers.openlibrary.org/b/id/10716589-L.jpg",
-        authors = "Holly Jackson"
-    ),
-    Book(
-        id = "OL35710173W",
-        title = "Your Fault",
-        firstPublishYear = 2023,
-        coverImageUrl = "https://firebasestorage.googleapis.com/v0/b/joniaranguri-resume.appspot.com/o/platzi-challenge%2Fcover-not-available.png?alt=media&token=0b43af6d-f671-4198-88d2-26062bd730d7",
-        authors = "Mercedes Ron"
-    ),
-    Book(
-        id = "OL35710173W",
-        title = "Your Fault",
-        firstPublishYear = 2023,
-        coverImageUrl = "https://firebasestorage.googleapis.com/v0/b/joniaranguri-resume.appspot.com/o/platzi-challenge%2Fcover-not-available.png?alt=media&token=0b43af6d-f671-4198-88d2-26062bd730d7",
-        authors = "Mercedes Ron"
-    )
-)
+
+class BooksRepositoryImpl @Inject constructor(
+    @get:VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    internal val booksApi: BooksApi,
+    @get:VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    internal val booksDao: BooksDao
+) : BooksRepository {
+    override suspend fun getBookList(
+        page: Int,
+        loadSize: Int
+    ): List<Book> = booksDao.getBookList(limit = loadSize, offset = loadSize * (page - 1))
+        .map { it.toDomainModel() }
+
+    override suspend fun refreshBooks(page: Int, loadSize: Int): List<Book> {
+        booksApi.getBookList(page = page, limit = loadSize)
+            .books.orEmpty()
+            .map { it.toEntityModel() }
+            .also { bookList ->
+                booksDao.insertOnlyNews(bookList)
+            }
+        return getBookList(page, loadSize)
+    }
+}
