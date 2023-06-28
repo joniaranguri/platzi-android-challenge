@@ -81,7 +81,9 @@ fun AuthorCard(author: Author, modifier: Modifier) {
                 style = MaterialTheme.typography.titleMedium,
             )
             Column(
-                modifier = Modifier.fillMaxSize().padding(vertical = defaultPadding()),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(vertical = defaultPadding()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(defaultPadding())
             ) {

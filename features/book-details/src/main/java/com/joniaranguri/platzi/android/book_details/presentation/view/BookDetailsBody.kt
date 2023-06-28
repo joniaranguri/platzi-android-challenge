@@ -73,11 +73,14 @@ fun BookDetailsContent(
 
             FlipDetails(bookDetails, title, coverImageUrl)
 
-            TitleLarge(text = "Topics")
-            SubjectList(subjectList = bookDetails.subjects)
-
-            TitleLarge(text = "About the authors")
-            AuthorList(authorList = bookDetails.authors)
+            if (bookDetails.subjects.isNotEmpty()) {
+                TitleLarge(text = "Topics")
+                SubjectList(subjectList = bookDetails.subjects)
+            }
+            if (bookDetails.authors.isNotEmpty()) {
+                TitleLarge(text = "About the authors")
+                AuthorList(authorList = bookDetails.authors)
+            }
         }
     }
 

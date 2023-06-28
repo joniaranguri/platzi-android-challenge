@@ -44,8 +44,9 @@ fun AuthorDetailResponse.toDomainModel() = Author(
 fun BookDetailsCached.toDomainModel() = BookDetails(
     bookId = id,
     description = description,
-    subjects = subjects.split(DB_LIST_SEPARATOR),
-    authors = authors.split(DB_LIST_SEPARATOR).map { Author(id = it) },
+    subjects = if (subjects.isEmpty()) emptyList() else subjects.split(DB_LIST_SEPARATOR),
+    authors = if (authors.isEmpty()) emptyList() else authors.split(DB_LIST_SEPARATOR)
+        .map { Author(id = it) },
     ratingAverage = ratingAverage,
     ratingCount = ratingCount,
     wantToRead = wantToRead,
