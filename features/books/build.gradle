@@ -59,6 +59,7 @@ dependencies {
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_compose_version"
+    testImplementation project(path: ':common:core')
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     //Room
@@ -72,7 +73,7 @@ dependencies {
 
     // Okhttp
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-    implementation"com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     implementation "com.github.chuckerteam.chucker:library:$chucker_version"
 
     //Moshi
@@ -87,7 +88,7 @@ dependencies {
     // Paging
     implementation "androidx.paging:paging-runtime:$paging_version"
 
-    implementation   "androidx.paging:paging-compose:$paging_compose_version"
+    implementation "androidx.paging:paging-compose:$paging_compose_version"
 
     implementation "com.google.accompanist:accompanist-pager:$pager_version"
 
@@ -97,8 +98,9 @@ dependencies {
     // Testing
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test_version"
-    testImplementation "org.mockito:mockito-core:$mockito_version"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
+    testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation "app.cash.turbine:turbine:$turbine_version"
+    testImplementation "com.google.truth:truth:$truth_version"
 
     androidTestImplementation "androidx.test.ext:junit:$android_junit_version"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
