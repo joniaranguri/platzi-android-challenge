@@ -3,6 +3,7 @@ package com.joniaranguri.platzi.android.ui.ext
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import com.joniaranguri.platzi.android.theme.Dimen.defaultPadding
+import com.joniaranguri.platzi.android.theme.Dimen.doublePadding
 import com.joniaranguri.platzi.android.theme.Dimen.littlePadding
 
 fun Modifier.defaultScreenPadding(): Modifier = this
@@ -12,6 +13,7 @@ fun Modifier.defaultScreenPadding(): Modifier = this
 fun Modifier.defaultContentPadding(): Modifier = this
     .padding(defaultPadding())
 
+fun doublePadding() = doublePadding()
 fun defaultPadding() = defaultPadding()
 
 fun littlePadding() = littlePadding()

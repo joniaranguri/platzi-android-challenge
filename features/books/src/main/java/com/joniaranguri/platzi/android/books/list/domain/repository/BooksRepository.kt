@@ -8,5 +8,6 @@ interface BooksRepository {
         loadSize: Int
     ): List<Book>
 
-    suspend fun refreshBooks(page: Int, loadSize: Int) :List<Book>
+    suspend fun refreshBooks(page: Int, loadSize: Int): List<Book>
+    suspend fun deleteBooks()
 }

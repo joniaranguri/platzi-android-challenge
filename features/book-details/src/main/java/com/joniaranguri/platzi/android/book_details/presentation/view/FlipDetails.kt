@@ -4,7 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -51,7 +55,23 @@ fun FlipDetails(bookDetails: BookDetails, title: String, coverImageUrl: String) 
 
 @Composable
 fun BackCard(bookDetails: BookDetails) {
-    Text(text = bookDetails.description)
+    val backCardSize = LocalConfiguration.current.screenHeightDp.dp * .7F
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(backCardSize),
+    ) {
+        Column(
+            modifier = Modifier
+                .defaultContentPadding()
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(defaultPadding())
+        ) {
+            TitleLarge(text = "Description")
+            Text(text = bookDetails.description)
+        }
+    }
 }
 
 @Composable
@@ -64,7 +84,15 @@ fun FrontCard(title: String, coverImageUrl: String, bookDetails: BookDetails) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        val noCoverImage =
+            painterResource(com.joniaranguri.platzi.android.ui.R.drawable.cover_not_available)
+        val coverPlaceholderImage =
+            painterResource(com.joniaranguri.platzi.android.ui.R.drawable.book_placeholder)
+
         AsyncImage(
+            placeholder = coverPlaceholderImage,
+            error = noCoverImage,
+            fallback = noCoverImage,
             model = ImageRequest.Builder(LocalContext.current)
                 .data(coverImageUrl)
                 .crossfade(500).build(),

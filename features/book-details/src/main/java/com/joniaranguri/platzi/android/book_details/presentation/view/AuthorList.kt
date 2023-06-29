@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -80,18 +81,25 @@ fun AuthorCard(author: Author, modifier: Modifier) {
                 style = MaterialTheme.typography.titleMedium,
             )
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(vertical = defaultPadding()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(defaultPadding())
             ) {
+                val noProfileImage =
+                    painterResource(com.joniaranguri.platzi.android.ui.R.drawable.no_profile_image)
                 AsyncImage(
+                    placeholder = noProfileImage,
+                    error = noProfileImage,
+                    fallback = noProfileImage,
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(author.photo)
                         .crossfade(500).build(),
                     contentDescription = "contentDescription",
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .fillMaxWidth(.8f)
                         .padding(5.dp)
                         .clip(RoundedCornerShape(5.dp))
                 )

@@ -67,7 +67,15 @@ fun BookRow(
                     ),
                 contentAlignment = Alignment.CenterEnd,
             ) {
+                val noCoverImage =
+                    painterResource(com.joniaranguri.platzi.android.ui.R.drawable.cover_not_available)
+                val coverPlaceholderImage =
+                    painterResource(com.joniaranguri.platzi.android.ui.R.drawable.book_placeholder)
+
                 AsyncImage(
+                    placeholder = coverPlaceholderImage,
+                    error = noCoverImage,
+                    fallback = noCoverImage,
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(dto.coverImageUrl)
                         .crossfade(500).build(),
