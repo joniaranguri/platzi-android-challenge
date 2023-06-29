@@ -1,6 +1,5 @@
 package com.joniaranguri.platzi.android.ui.widgets
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,7 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import coil.compose.rememberAsyncImagePainter
+import androidx.compose.ui.platform.LocalContext
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.joniaranguri.platzi.android.ui.R
 import com.joniaranguri.platzi.android.ui.ext.defaultContentPadding
 import com.joniaranguri.platzi.android.ui.ext.defaultPadding
@@ -30,12 +31,15 @@ fun BaseErrorView(e: Throwable, action: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TitleLarge(text = "!Ups!")
-        Image(
-            painter = rememberAsyncImagePainter(R.drawable.error_image),
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(R.drawable.error_image)
+                .crossfade(500).build(),
             contentDescription = "Error image illustration",
+            contentScale = ContentScale.Inside,
             modifier = Modifier.fillMaxWidth(),
-            contentScale = ContentScale.Inside
-        )
+
+            )
         TitleLarge(text = "Something went wrong")
         Text(text = e.message.orEmpty())
         Button(onClick = action) {
