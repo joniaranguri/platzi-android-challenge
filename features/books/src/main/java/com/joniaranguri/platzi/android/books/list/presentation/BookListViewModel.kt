@@ -25,7 +25,9 @@ class BookListViewModel @Inject constructor(
 
     private fun onLoadBooks() = safeLaunch {
         setState(BaseViewState.Loading)
-        val params = GetBooks.Params(config)
+        val params = GetBooks.Params(
+            config,
+            onAPIError = { exception -> setState(BaseViewState.Error(exception)) })
         val pagedFlow = getBooks(params).cachedIn(scope = viewModelScope)
         setState(BaseViewState.Data(BooksViewState(pagedData = pagedFlow)))
     }

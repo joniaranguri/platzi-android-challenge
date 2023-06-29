@@ -17,12 +17,13 @@ class GetBooks @Inject constructor(
 
     data class Params(
         val pagingConfig: PagingConfig,
+        val onAPIError: (Throwable) -> Unit
     )
 
     override fun execute(params: Params): Flow<PagingData<Book>> {
         return Pager(
             config = params.pagingConfig,
-            pagingSourceFactory = { BookPagingSource(repository) }
+            pagingSourceFactory = { BookPagingSource(repository, params.onAPIError) }
         ).flow
     }
 }
