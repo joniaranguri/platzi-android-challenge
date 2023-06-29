@@ -13,4 +13,5 @@ data class BooksViewState(
 
 sealed class BooksEvent {
     object LoadBooks : BooksEvent()
+    object RefreshBooks : BooksEvent()
 }

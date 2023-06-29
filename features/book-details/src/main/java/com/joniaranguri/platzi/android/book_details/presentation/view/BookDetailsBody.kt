@@ -5,11 +5,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -19,6 +19,7 @@ import com.joniaranguri.platzi.android.book_details.presentation.BookDetailsView
 import com.joniaranguri.platzi.android.book_details.presentation.BookDetailsViewState
 import com.joniaranguri.platzi.android.core.base.mvi.BaseViewState
 import com.joniaranguri.platzi.android.core.extension.cast
+import com.joniaranguri.platzi.android.ui.widgets.BaseErrorView
 import com.joniaranguri.platzi.android.ui.widgets.TitleLarge
 
 
@@ -31,26 +32,27 @@ fun BookDetailsBody(
     viewModel: BookDetailsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val initialLoad = rememberSaveable { true }
 
     when (uiState) {
-        is BaseViewState.Data -> BookDetailsContent(
+        is BaseViewState.Data  -> BookDetailsContent(
             modifier = modifier,
             title = title,
             coverImageUrl = coverImageUrl,
             bookDetailsViewState = uiState.cast<BaseViewState.Data<BookDetailsViewState>>().value,
         )
 
-        is BaseViewState.Empty -> Text(text = "Empty")
-        is BaseViewState.Error -> Text(text = "Empty") /*ErrorView(
+        is BaseViewState.Error -> BaseErrorView(
             e = uiState.cast<BaseViewState.Error>().throwable,
             action = {
-                viewModel.onTriggerEvent(CharacterDetailEvent.LoadDetail(id))
+                viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(bookId))
             }
-        )*/
-        is BaseViewState.Loading -> Text(text = "Loading")
+        )
+
+        is BaseViewState.Loading, BaseViewState.Empty -> LoadingBookDetailView(modifier)
     }
 
-    LaunchedEffect(key1 = viewModel, block = {
+    LaunchedEffect(key1 = initialLoad, block = {
         viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(bookId))
     })
 }

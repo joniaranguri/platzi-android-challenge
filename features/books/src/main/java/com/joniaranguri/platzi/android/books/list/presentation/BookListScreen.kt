@@ -7,15 +7,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.joniaranguri.platzi.android.books.list.presentation.view.BookListContent
+import com.joniaranguri.platzi.android.books.list.presentation.view.BookListLoadingView
 import com.joniaranguri.platzi.android.core.base.mvi.BaseViewState
 import com.joniaranguri.platzi.android.core.extension.cast
 import com.joniaranguri.platzi.android.ui.navigation.NavigationItem
+import com.joniaranguri.platzi.android.ui.widgets.BaseErrorView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,17 +44,25 @@ fun BookListBody(
     viewModel: BookListViewModel
 ) {
     when (uiState) {
+        is BaseViewState.Empty -> viewModel.onTriggerEvent(BooksEvent.LoadBooks)
+
+        is BaseViewState.Loading -> BookListLoadingView(
+            modifier = modifier.padding(innerPadding),
+        )
+
         is BaseViewState.Data -> BookListContent(
             modifier = modifier.padding(innerPadding),
             viewState = uiState.cast<BaseViewState.Data<BooksViewState>>().value,
             goToBookDetails = goToBookDetails,
-            paddingValues = innerPadding
+            paddingValues = innerPadding,
+            viewModel = viewModel
         )
 
-        is BaseViewState.Error -> Text(text = "Error")
-        else -> Text(text = "Error")
+        is BaseViewState.Error -> BaseErrorView(
+            e = uiState.cast<BaseViewState.Error>().throwable,
+            action = {
+                viewModel.onTriggerEvent(BooksEvent.LoadBooks)
+            }
+        )
     }
-    LaunchedEffect(key1 = viewModel, block = {
-        viewModel.onTriggerEvent(BooksEvent.LoadBooks)
-    })
 }

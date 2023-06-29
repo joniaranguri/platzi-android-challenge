@@ -31,4 +31,8 @@ class BooksRepositoryImpl @Inject constructor(
             }
         return getBookList(page, loadSize)
     }
+
+    override suspend fun deleteBooks() {
+        booksDao.deleteBooks()
+    }
 }
