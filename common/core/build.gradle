@@ -66,7 +66,7 @@ dependencies {
 
     // Okhttp
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-    implementation"com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     implementation "com.github.chuckerteam.chucker:library:$chucker_version"
 
     // Timber
@@ -75,7 +75,8 @@ dependencies {
     // Room
     implementation "androidx.room:room-common:$room_version"
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1"
+
+    api "junit:junit:$junit_version"
+    api "io.mockk:mockk:$mockk_version"
 }
