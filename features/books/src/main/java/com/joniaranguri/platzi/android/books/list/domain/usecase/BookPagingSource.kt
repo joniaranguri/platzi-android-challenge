@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.joniaranguri.platzi.android.books.list.domain.model.Book
 import com.joniaranguri.platzi.android.books.list.domain.repository.BooksRepository
+import com.joniaranguri.platzi.android.core.network.handleThrowable
 import java.io.IOException
 
 
@@ -30,7 +31,7 @@ class BookPagingSource(
                 nextKey = if (bookList.isEmpty()) null else page + 1
             )
         } catch (exception: IOException) {
-            onAPIError(exception)
+            if (page == 1) onAPIError(exception.handleThrowable())
             return LoadResult.Error(exception)
 
         }

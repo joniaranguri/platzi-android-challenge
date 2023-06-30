@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.joniaranguri.platzi.android.ui.R
@@ -50,7 +51,7 @@ fun BaseErrorView(e: Throwable, action: () -> Unit) {
 
                 )
             TitleLarge(text = "Something went wrong")
-            Text(text = e.message.orEmpty())
+            Text(text = e.message.toString(), modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
             Button(onClick = action) {
                 Text("Retry")
             }
