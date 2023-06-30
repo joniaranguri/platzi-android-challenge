@@ -10,11 +10,11 @@ sealed class Failure : IOException() {
     object UnknownError : Failure()
     object UnknownHostError : Failure()
     object EmptyResponse : Failure()
-    object ConnectivityError : Failure()
     object InternetError : Failure()
     object UnAuthorizedException : Failure()
     object ParsingDataError : Failure()
     object IgnorableError : Failure()
+    data class ConnectivityError(override var message: String) : Failure()
     data class TimeOutError(override var message: String) : Failure()
     data class ApiError(var code: Int = 0, override var message: String) : Failure()
     data class ServerError(var code: Int = 0, override var message: String) : Failure()
@@ -27,7 +27,7 @@ sealed class Failure : IOException() {
 fun Throwable.handleThrowable(): Failure {
     // Timber.e(this)
     return if (this is UnknownHostException) {
-        Failure.ConnectivityError
+        Failure.ConnectivityError("We cannot load the content, check your internet connection")
     } else if (this is HttpException && this.code() == HttpStatusCode.Unauthorized.code) {
         Failure.UnAuthorizedException
     } else if (this is SocketTimeoutException) {
