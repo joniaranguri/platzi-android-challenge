@@ -9,6 +9,9 @@ import com.joniaranguri.platzi.android.book_details.data.remote.model.BookAnalyt
 import com.joniaranguri.platzi.android.book_details.data.remote.model.BookRatingsResponse
 import com.joniaranguri.platzi.android.book_details.domain.model.BookDetails
 import com.joniaranguri.platzi.android.book_details.domain.repository.BookDetailsRepository
+import com.joniaranguri.platzi.android.core.data.remote.api.OpenAIApi
+import com.joniaranguri.platzi.android.core.data.remote.model.ai.OpenAIRequestBody
+import com.joniaranguri.platzi.android.core.data.remote.model.base.InconsistentType
 import javax.inject.Inject
 
 
@@ -16,15 +19,32 @@ class BookDetailsRepositoryImpl @Inject constructor(
     @get:VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     internal val bookDetailsApi: BookDetailsApi,
     @get:VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    internal val bookDetailsDao: BookDetailsDao
+    internal val bookDetailsDao: BookDetailsDao,
+    @get:VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    internal val openAIApi: OpenAIApi
 ) : BookDetailsRepository {
     override suspend fun getBookDetails(
-        bookId: String
+        bookId: String,
+        bookTitle: String
     ): BookDetails {
         return bookDetailsDao.getBookDetails(bookId)?.toDomainModel()
             ?: bookDetailsApi.getBookDetails(
                 bookId
-            ).toDomainModel(bookId)
+            ).also {
+                if (it.description?.value.isNullOrEmpty()) {
+                    val bookAIDescription = getIABookDescription(bookTitle)
+                    it.description = InconsistentType(
+                        value = bookAIDescription,
+                        generatedByAI = bookAIDescription.isNotEmpty()
+                    )
+                }
+            }.toDomainModel(bookId)
+    }
+
+    override suspend fun getIABookDescription(bookTitle: String): String {
+        return openAIApi.getOpenAIResult(
+            OpenAIRequestBody(prompt = "$PROMPT_BOOK_DESCRIPTION$bookTitle")
+        ).choices.firstOrNull()?.value.orEmpty()
     }
 
     override suspend fun getBookRatings(bookId: String): BookRatingsResponse =
@@ -37,4 +57,7 @@ class BookDetailsRepositoryImpl @Inject constructor(
         bookDetailsDao.insert(bookDetailsCached)
     }
 
+    companion object {
+        const val PROMPT_BOOK_DESCRIPTION = "Description for book: "
+    }
 }

@@ -1,4 +1,4 @@
-package com.joniaranguri.platzi.android.core.data.remote.di
+package com.joniaranguri.platzi.android.core.data.remote.di.base
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor

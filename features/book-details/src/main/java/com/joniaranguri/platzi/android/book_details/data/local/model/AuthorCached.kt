@@ -19,6 +19,9 @@ data class AuthorCached(
     @ColumnInfo(name = COLUMN_BIOGRAPHY)
     val biography: String,
 
+    @ColumnInfo(name = COLUMN_BIOGRAPHY_BY_IA)
+    val biographyByAI: Boolean,
+
     @ColumnInfo(name = COLUMN_PHOTO)
     val photo: String
 ) {
@@ -27,6 +30,7 @@ data class AuthorCached(
         const val COLUMN_ID = "id"
         const val COLUMN_NAME = "name"
         const val COLUMN_BIOGRAPHY = "biography"
+        const val COLUMN_BIOGRAPHY_BY_IA = "biography_by_ia"
         const val COLUMN_PHOTO = "photo"
     }
 }

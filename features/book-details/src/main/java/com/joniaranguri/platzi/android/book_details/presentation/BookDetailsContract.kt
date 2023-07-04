@@ -7,5 +7,5 @@ data class BookDetailsViewState(
 )
 
 sealed class BookDetailsEvent {
-    data class LoadDetail(val bookId: String) : BookDetailsEvent()
+    data class LoadDetail(val bookId: String, val bookTitle: String) : BookDetailsEvent()
 }

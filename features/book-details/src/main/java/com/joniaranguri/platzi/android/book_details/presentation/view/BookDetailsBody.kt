@@ -35,7 +35,7 @@ fun BookDetailsBody(
     val initialLoad = rememberSaveable { true }
 
     when (uiState) {
-        is BaseViewState.Data  -> BookDetailsContent(
+        is BaseViewState.Data -> BookDetailsContent(
             modifier = modifier,
             title = title,
             coverImageUrl = coverImageUrl,
@@ -45,7 +45,7 @@ fun BookDetailsBody(
         is BaseViewState.Error -> BaseErrorView(
             e = uiState.cast<BaseViewState.Error>().throwable,
             action = {
-                viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(bookId))
+                viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(bookId, title))
             }
         )
 
@@ -53,7 +53,7 @@ fun BookDetailsBody(
     }
 
     LaunchedEffect(key1 = initialLoad, block = {
-        viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(bookId))
+        viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(bookId, title))
     })
 }
 

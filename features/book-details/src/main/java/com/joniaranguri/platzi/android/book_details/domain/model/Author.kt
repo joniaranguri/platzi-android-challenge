@@ -4,5 +4,6 @@ data class Author(
     val id: String,
     val name: String = "",
     val biography: String = "",
+    val biographyByAI: Boolean = false,
     val photo: String = ""
 )

@@ -19,7 +19,8 @@ import com.joniaranguri.platzi.android.book_details.domain.model.BookDetails
 
 fun BookDetailsResponse.toDomainModel(bookId: String) = BookDetails(
     bookId = bookId,
-    description = description?.value ?: NO_DESCRIPTION,
+    description = description?.value?.replace("\n\n", "") ?: NO_DESCRIPTION,
+    descriptionByAI = description?.generatedByAI == true,
     subjects = subjects.orEmpty().take(MAX_SUBJECTS),
     authors = authors?.map {
         Author(
@@ -37,6 +38,7 @@ fun AuthorDetailResponse.toDomainModel() = Author(
     id = id!!,
     name = name ?: NO_NAME,
     biography = bio?.value ?: NO_BIO,
+    biographyByAI = bio?.generatedByAI == true,
     photo = photoIds?.firstOrNull()
         ?.let { photoId -> "$COVER_PREFIX$photoId$COVER_SUFFIX" }.orEmpty()
 )
@@ -44,6 +46,7 @@ fun AuthorDetailResponse.toDomainModel() = Author(
 fun BookDetailsCached.toDomainModel() = BookDetails(
     bookId = id,
     description = description,
+    descriptionByAI = descriptionByAI,
     subjects = if (subjects.isEmpty()) emptyList() else subjects.split(DB_LIST_SEPARATOR),
     authors = if (authors.isEmpty()) emptyList() else authors.split(DB_LIST_SEPARATOR)
         .map { Author(id = it) },
@@ -58,12 +61,14 @@ fun AuthorCached.toDomainModel() = Author(
     id = id,
     name = name,
     biography = biography,
+    biographyByAI = biographyByAI,
     photo = photo
 )
 
 fun BookDetails.toEntityModel() = BookDetailsCached(
     id = bookId,
     description = description,
+    descriptionByAI = descriptionByAI,
     subjects = subjects.joinToString(separator = DB_LIST_SEPARATOR),
     authors = authors.joinToString(DB_LIST_SEPARATOR) { author -> author.id },
     ratingAverage = ratingAverage,
@@ -84,6 +89,7 @@ fun Author.toEntityModel() = AuthorCached(
     id = id,
     name = name,
     biography = biography,
+    biographyByAI = biographyByAI,
     photo = photo
 )
 

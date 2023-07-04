@@ -1,4 +1,4 @@
-package com.joniaranguri.platzi.android.core.data.remote.model
+package com.joniaranguri.platzi.android.core.data.remote.model.base
 
 import com.squareup.moshi.FromJson
 

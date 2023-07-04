@@ -1,6 +1,6 @@
 package com.joniaranguri.platzi.android.book_details.data.remote.model
 
-import com.joniaranguri.platzi.android.core.data.remote.model.InconsistentType
+import com.joniaranguri.platzi.android.core.data.remote.model.base.InconsistentType
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -19,14 +19,14 @@ data class AuthorKey(
 @JsonClass(generateAdapter = true)
 data class AuthorDetailResponse(
 
-    var id: String?,
+    var id: String? = null,
 
     @Json(name = "bio")
-    val bio: InconsistentType?,
+    var bio: InconsistentType? = null,
 
     @Json(name = "name")
-    val name: String?,
+    val name: String? = null,
 
     @Json(name = "photos")
-    val photoIds: List<Long>?
+    val photoIds: List<Long>? = null
 )
