@@ -2,7 +2,7 @@ package com.joniaranguri.platzi.android.book_details.data.remote.di
 
 import com.joniaranguri.platzi.android.book_details.data.remote.api.AuthorDetailsApi
 import com.joniaranguri.platzi.android.book_details.data.remote.api.BookDetailsApi
-import com.joniaranguri.platzi.android.core.data.remote.di.RemoteModule.Companion.BASE_URL
+import com.joniaranguri.platzi.android.core.data.remote.di.base.RemoteModule.Companion.BASE_URL
 import com.joniaranguri.platzi.android.core.network.createRetrofitWithMoshi
 import com.squareup.moshi.Moshi
 import dagger.Module

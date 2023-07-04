@@ -31,24 +31,32 @@ internal class BookDetailsViewModelTest : BaseUnitTest() {
     lateinit var viewModel: BookDetailsViewModel
 
     private val mockedBookId = "AO098AS"
+    private val mockedBookTitle = "Some title"
 
 
     @Test
     fun `When LoadDetail Event is triggered, GetBookDetails useCase is called`() = runTest {
-        viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(mockedBookId))
+        viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(mockedBookId, mockedBookTitle))
 
-        coVerify { getBookDetails.invoke(GetBookDetails.Params(bookId = mockedBookId)) }
+        coVerify {
+            getBookDetails.invoke(
+                GetBookDetails.Params(
+                    bookId = mockedBookId,
+                    bookTitle = mockedBookTitle
+                )
+            )
+        }
     }
 
     @Test
     fun `When GetBookDetails is successful, final state is BaseViewData`() = runTest {
         val bookDetails = mockk<BookDetails>()
-        val params = GetBookDetails.Params(bookId = mockedBookId)
+        val params = GetBookDetails.Params(bookId = mockedBookId, bookTitle = mockedBookTitle)
         coEvery { getBookDetails.invoke(params) } returns flow {
             emit(DataState.Success(bookDetails))
         }
 
-        viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(mockedBookId))
+        viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(mockedBookId, mockedBookTitle))
 
         viewModel.uiState.test {
             awaitItem().apply {
@@ -64,7 +72,7 @@ internal class BookDetailsViewModelTest : BaseUnitTest() {
             emit(DataState.Error(IOException("some exception.")))
         }
 
-        viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(mockedBookId))
+        viewModel.onTriggerEvent(BookDetailsEvent.LoadDetail(mockedBookId, mockedBookTitle))
 
         coVerify(exactly = 1) { getBookDetails(any()) }
         confirmVerified(getBookDetails)

@@ -13,12 +13,12 @@ class BookDetailsViewModel @Inject constructor(
 
     override fun onTriggerEvent(eventType: BookDetailsEvent) {
         when (eventType) {
-            is BookDetailsEvent.LoadDetail -> onLoadDetail(eventType.bookId)
+            is BookDetailsEvent.LoadDetail -> onLoadDetail(eventType.bookId, eventType.bookTitle)
         }
     }
 
-    private fun onLoadDetail(bookId: String) = safeLaunch {
-        val params = GetBookDetails.Params(bookId = bookId)
+    private fun onLoadDetail(bookId: String, bookTitle: String) = safeLaunch {
+        val params = GetBookDetails.Params(bookId = bookId, bookTitle = bookTitle)
         execute(getBookDetails(params)) { dto ->
             setState(BaseViewState.Data(BookDetailsViewState(bookDetails = dto)))
         }

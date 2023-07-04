@@ -16,6 +16,9 @@ data class BookDetailsCached(
     @ColumnInfo(name = COLUMN_DESCRIPTION)
     val description: String,
 
+    @ColumnInfo(name = COLUMN_DESCRIPTION_BY_IA)
+    val descriptionByAI: Boolean,
+
     @ColumnInfo(name = COLUMN_SUBJECTS)
     val subjects: String,
 
@@ -42,6 +45,7 @@ data class BookDetailsCached(
         const val TABLE_NAME = "book_details"
         const val COLUMN_ID = "id"
         const val COLUMN_DESCRIPTION = "description"
+        const val COLUMN_DESCRIPTION_BY_IA = "description_by_ia"
         const val COLUMN_SUBJECTS = "subjects"
         const val COLUMN_AUTHORS = "authors"
         const val COLUMN_RATING_AVG = "rating_average"

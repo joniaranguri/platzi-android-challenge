@@ -24,12 +24,15 @@ constructor(
 ) : DataStateUseCase<GetBookDetails.Params, BookDetails>() {
 
     data class Params(
-        val bookId: String? = null
+        val bookId: String,
+        val bookTitle: String
     )
 
     override suspend fun FlowCollector<DataState<BookDetails>>.execute(params: Params) {
-        val bookId = params.bookId.orEmpty()
-        val bookDetailsDataState = apiCall { bookDetailsRepository.getBookDetails(bookId = bookId) }
+        val bookId = params.bookId
+        val bookTitle = params.bookTitle
+        val bookDetailsDataState =
+            apiCall { bookDetailsRepository.getBookDetails(bookId = bookId, bookTitle = bookTitle) }
         bookDetailsDataState.map { bookDetails ->
             if (bookDetails.isNotInDB()) {
                 val bookAnalytics = bookDetailsRepository.getBookAnalytics(bookId)

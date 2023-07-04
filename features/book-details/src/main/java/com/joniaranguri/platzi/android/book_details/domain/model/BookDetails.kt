@@ -3,6 +3,7 @@ package com.joniaranguri.platzi.android.book_details.domain.model
 data class BookDetails(
     val bookId: String,
     val description: String,
+    val descriptionByAI: Boolean = false,
     val subjects: List<String>,
     var authors: List<Author> = emptyList(),
     var ratingAverage: Float,
