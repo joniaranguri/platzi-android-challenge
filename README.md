@@ -104,10 +104,18 @@ Each time a request is made, the data is saved on Room Database to be accesed fr
 
 | Book Topics                                                 | Book Author                                                  | Book Multiple Authors                                                    |
 |-------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------------------|
-| <img src="pictures/screens/topics-section.png" width="250"> | <img src="pictures/screens/authors-section.png" width="250"> | <img src="pictures/screens/book-detail-multiple-author.png" width="250"> |
+| <img src="pictures/screens/topics-section.png" width="250"> | <img src="pictures/screens/authors-section.png" width="250"> | <img src="pictures/screens/authors-bio-generated-by-ai.png" width="250"> |
 
 
+## Bonus! Using OpenAIApi to generate missing data
 
+I noticed that certain authors and book descriptions were empty. So, why not use AI to generate them? 
+The data load may be a little slower, but it's better than having an empty description, isn't it?
+The generated results are labeled, making it easy for you to identify them.
+
+| Book description by AI                                                    | Biographies by AI                                                        |
+|---------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| <img src="pictures/screens//description-generated-by-ai.png" width="250"> | <img src="pictures/screens/authors-bio-generated-by-ai.png" width="250"> |
 
 ## Libraries used
 
